@@ -11,6 +11,8 @@ constructor(){
     monsters: [],
     searchField:''
  };
+
+ this.handleChange = this.handleChange.bind(this);
 }
 
 componentDidMount(){
@@ -19,33 +21,39 @@ componentDidMount(){
 .then(users => this.setState({monsters:users}));
 }
 
-  render(){
-  const {monsters, searchField}=this.state;
-  const filteredMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
+// handleChange(c){
+//   this.setState({searchField: c.target.value});
+// }
 
- // if (this.state.monsters.length != 0){
+handleChange= (c)=>{
+  this.setState({searchField: c.target.value});
+}
+
+  render(){
+    const { monsters, searchField }=this.state;
+    const filteredMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
+
     return( 
      <div className="App">
      <SearchBox 
      placeholder="search monsters"
-     handleChange ={ c => {
-      this.setState({searchField: c.target.value});
-      console.log(this.state);
-      }
-    } />
-{/* 
+     handleChange ={this.handleChange}/>
+
+      {/* 
        <input type="search" 
         placeholder='search monsters'
         onChange={c => {
         this.setState({searchField: c.target.value});
         console.log(this.state);
         }
-      }/> */}
-       <CardList monsters = {filteredMonsters} />
-       
+      }/>
+      */}
+
+     <CardList monsters = {filteredMonsters} />  
      </div>
+
     );
-  //}
+
 
 }
 }

@@ -13,8 +13,6 @@ constructor(){
  };
 
  this.handleChange = this.handleChange.bind(this);
-
- this.handleClick2 = this.handleClick1.bind(this);
 }
 
 componentDidMount(){
@@ -33,25 +31,38 @@ handleChange= (c)=>{
   this.setState({searchField: c.target.value});
 }
 
-handleClick1(){
-  console.log('button 999991 clicked');
-  //console.log(this);
-}
-handleClick3 = () => console.log('button 3 clicked');
-
   render(){
     const { monsters, searchField }=this.state;
     const filteredMonsters = monsters.filter(monster => monster.name.toLowerCase().includes(searchField.toLowerCase()));
 
     return( 
-      <div className="App">
+     <div className="App">
+       <h1>Monsters Rolodex</h1>
+     <SearchBox 
+     placeholder="search monsters"
+     handleChange ={this.handleChange}/>
+
+      {/* 
+       <input type="search" 
+        placeholder='search monsters'
+        onChange={c => {
+        this.setState({searchField: c.target.value});
+        console.log(this.state);
+        }
+      }/>
+      */}
+
+     <CardList monsters = {filteredMonsters} />  
+
+
+     {/* <div>
       <button onClick={this.handleClick1()}>click 1</button>
       <button onClick={this.handleClick1}>click 2</button>
       <button onClick={this.handleClick2}>click 3</button>
       <button onClick={this.handleClick3}>click 4</button>
-     </div>
+     </div> */}
 
- 
+     </div>
 
 
 
